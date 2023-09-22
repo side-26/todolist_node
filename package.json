@@ -1,0 +1,27 @@
+{
+  "name": "structure",
+  "version": "1.0.0",
+  "description": "this is node folder structure",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/side-26/node-structure.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/side-26/node-structure/issues"
+  },
+  "homepage": "https://github.com/side-26/node-structure#readme",
+  "devDependencies": {
+    "nodemon": "3.0.1"
+  },
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "4.18.2"
+  }
+}
