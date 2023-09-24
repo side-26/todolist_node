@@ -18,9 +18,13 @@
   },
   "homepage": "https://github.com/side-26/node-structure#readme",
   "devDependencies": {
-    "nodemon": "3.0.1"
+    "autoprefixer": "^10.4.16",
+    "nodemon": "3.0.1",
+    "postcss": "^8.4.30",
+    "tailwindcss": "^3.3.3"
   },
   "dependencies": {
+    "body-parser": "^1.20.2",
     "ejs": "^3.1.9",
     "express": "4.18.2"
   }

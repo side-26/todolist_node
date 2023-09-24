@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>
+        <%= title %>
+    </title>
+</head>
+
+<body dir="rtl">
+    <main class="lg:w-1/2 mx-auto py-5">
+        <h1 class="font-bold text-3xl  text-center my-5">کارهای روزانه</h1>
+        <div class="">
+            <form action="/todo/create" method="POST" class="flex items-scratch h-fit">
+                <div class="w-full border-[1px] border-grey py-3 px-2 rounded-sm">
+                    <input type="text" name="todo" placeholder="کار امروز" class="w-full focus:outline-none"
+                        dir="rtl" />
+                </div>
+                <button type="submit" class="bg-blue-400 font-bold text-2xl px-3 h-full py-2 rounded-sm text-white">
+                    +
+                </button>
+
+            </form>
+            <div
+                class="w-full flex justify-around gap-10 items-center bg-blue-300 p-8 rounded-md overflow-hidden text-sm">
+                <div class="flex items-center gap-5">
+                    <div class="text-blue-700">
+                        کارهای اعلام شده :
+                    </div>
+                    <div class="bg-green-600 px-2 rounded-full text-white">
+                        0
+                    </div>
+                </div>
+                <div class="flex items-center gap-5">
+                    <div class="text-blue-700">
+                        کارهای باقی مانده :
+                    </div>
+                    <div class=" px-2 rounded-full text-white bg-yellow-500
+                    ">
+                        0
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+                <% todosList?.forEach(({id,title,completed})=> { %>
+                        <div class="p-6 rounded-sm bg-amber-400 text-sm">
+                            <div class="flex justify-center gap-10">
+                                <div class="font-bold text-green-600">
+                                    <%=title%>
+                                </div>
+                                <div class="flex gap-5">
+                                    <a href=`/todo/complete/<%=id%>` class="p-1 bg-green-500">C</a>
+                                    <a href='/todo/delete/<%=id%>' class="p-1 bg-red-600">D</a>
+                                </div>
+                            </div>
+
+                        </div>
+                <% }) %>
+
+        </div>
+    </main>
+</body>
+
+</html>

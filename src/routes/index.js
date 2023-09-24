@@ -1,5 +1,6 @@
 const { homePage } = require('./home');
-const { adminPage } = require('./admin');
+const { createTodo } = require('./createTodo');
+const {deleteRoute} = require("./deleteTodo.routes");
 module.exports = {
-    homePage, adminPage
+    homePage,createTodo,deleteRoute
 }

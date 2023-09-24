@@ -1,24 +1,10 @@
 const express = require('express');
-const path = require('path');
-const rootDir = require('../utils/helpers/path');
+
+const {getAllTodos} = require("../controllers/getAllTodos.controller");
+const {homeRoute} = require("../../config/constants");
 const router = express.Router()
-router.get('/', (req, res) => {
-    const viewRoute = path.join(rootDir, 'views', 'pages', 'home')
-    const pageTitle = 'home page'
-    const names = [{
-        id: 1,
-        name: 'mammad'
-    },
-    {
-        id: 2,
-        name: 'ali'
-    },
-    {
-        id: 3,
-        name: 'mahdi'
-    }]
-    res.render(viewRoute, { title: pageTitle, names })
-})
+
+router.get(homeRoute,getAllTodos)
 module.exports = {
     homePage: router
 }
