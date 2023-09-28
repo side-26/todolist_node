@@ -1,6 +1,6 @@
 const fs = require('fs');
 const { dbPath } = require('../../config/constants');
-
+   
 class Todo {
     constructor(id, title, completed = false) {
         this.id = id;
@@ -21,6 +21,16 @@ class Todo {
     }
     static getAllTodo=(callback)=>{
         fs.readFile(dbPath,callback)
+    }
+    static completeTodo=(callback)=>{
+        fs.readFile(dbPath,(err,data)=>{
+            if(err) {
+                console.log(err);
+                return;
+            }
+            const parsedData=JSON.parse(data)
+            callback(parsedData)
+        })
     }
 }
 module.exports = { Todo }
