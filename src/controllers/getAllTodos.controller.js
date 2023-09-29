@@ -1,20 +1,23 @@
-const {Todo}=require('../models/index')
-const {homeRoute} = require("../../config/constants");
+const Todo = require("../models/todo");
 const path = require("path");
 const rootDir = require("../utils/helpers/path");
-const {completedTodos, getCompletedTodos}=require('../utils/helpers/completedTodosCount')
-const {uncompletedTodos, getUncompletedTodos}=require('../utils/helpers/uncompletedTodosCount')
-const getAllTodosController=(req, res)=>{
-    const viewRoute = path.join(rootDir, 'views', 'pages', 'home')
-    Todo.getAllTodo((err,data)=>{
-        if(err){
-            console.log(data)
-            return
-        }
-        const parsedTodos=JSON.parse(data)
-        const completedTodos=getCompletedTodos(parsedTodos);
-        const uncompletedTodos=getUncompletedTodos(parsedTodos)
-        res.render(viewRoute,{todosList:parsedTodos,title:'صفحه اصلی',completedTodos,uncompletedTodos})
+const { getCompletedTodos } = require("../utils/helpers/completedTodosCount");
+const getAllTodosController = async (req, res) => {
+  const viewRoute = path.join(rootDir, "views", "pages", "home");
+  const completedTodo = await Todo.findAndCountAll({
+    where: { completed: true },
+  }).then((res) => res.count);
+  const completedTodos = await getCompletedTodos();
+  Todo.findAll()
+    .then((todosList) => {
+      const uncompletedTodos = todosList.length - completedTodo;
+      res.render(viewRoute, {
+        todosList,
+        title: "صفحه اصلی",
+        completedTodos,
+        uncompletedTodos,
+      });
     })
-}
-module.exports={getAllTodos:getAllTodosController}
+    .catch((err) => console.log(err));
+};
+module.exports = { getAllTodos: getAllTodosController };

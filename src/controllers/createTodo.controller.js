@@ -1,12 +1,8 @@
-const { Todo } = require('../models/index');
+const { homeRoute } = require("../../config/constants");
+const Todo = require("../models/todo");
 
 const createTodo = (req, res) => {
-    const todoId = new Date().getTime()
-    const todo =new Todo(todoId, req.body.todo,false)
-    todo.createTodo((err)=>{
-        if (!err)
-            res.redirect('/')
-        else console.log(err)
-    })
-}
-module.exports={createTodo}
+  const title = req.body.todo;
+  Todo.create({ title }).then((result) => res.redirect(homeRoute));
+};
+module.exports = { createTodo };

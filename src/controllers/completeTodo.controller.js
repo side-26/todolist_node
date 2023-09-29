@@ -1,25 +1,9 @@
-const {Todo} = require("../models");
-const {dbPath, homeRoute} = require("../../config/constants");
-const fs = require("fs");
-const completeTodo=(req,res)=>{
-    Todo.completeTodo((data)=>{
-        const completedId=+req.params.id
-        const newData = data.map(d =>
-            d.id === completedId
-                ? { ...d, completed: true }
-                : d
-        );
-        const strData=JSON.stringify(newData)
-        fs.writeFile(dbPath,strData,(err)=>{
-            if(err){
-                console.log(err)
-                return
-            }
-            res.redirect(homeRoute)
-        })
-        console.log(newData)
-    })
-
-
-}
-module.exports={completeTodo}
+const Todo = require("../models/todo");
+const { homeRoute } = require("../../config/constants");
+const completeTodo = (req, res) => {
+  const updatedId = req.params.id;
+  Todo.update({ completed: 1 }, { where: { id: updatedId } })
+    .then(() => res.redirect(homeRoute))
+    .catch((err) => console.log(err));
+};
+module.exports = { completeTodo };
